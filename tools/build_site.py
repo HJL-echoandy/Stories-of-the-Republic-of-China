@@ -217,6 +217,14 @@ def build():
     with open(os.path.join(OUT, ".nojekyll"), "w", encoding="utf-8") as f:
         f.write("")
 
+    # 复制 LICENSE 到 docs/，使线上站点页脚的许可链接可用
+    lic_src = os.path.join(ROOT, "LICENSE")
+    if os.path.isfile(lic_src):
+        with open(lic_src, encoding="utf-8") as f:
+            lic_text = f.read()
+        with open(os.path.join(OUT, "LICENSE"), "w", encoding="utf-8") as f:
+            f.write(lic_text)
+
     print("生成完成：%d 章，%d 卷" % (len(all_chapters), len(volumes)))
 
 
